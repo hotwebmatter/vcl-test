@@ -1,0 +1,15 @@
+name: vcl-test
+recipe: lamp
+config:
+  webroot: web
+services:
+  appserver:
+    type: nginx
+  varnish:
+    type: varnish:6
+    backends:
+      - appserver
+    backend_port: 80
+    ssl: false
+    config:
+      vcl: lando/custom.vcl
